@@ -1,6 +1,7 @@
-package com.example.hotel.model;
+package com.example.hotel.model.room;
 
 import com.example.hotel.core.base.BaseEntity;
+import com.example.hotel.model.hotel.Hotel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

@@ -1,6 +1,7 @@
-package com.example.hotel.model;
+package com.example.hotel.model.user;
 
 import com.example.hotel.core.base.BaseEntity;
+import com.example.hotel.model.role.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,7 @@
-package com.example.hotel.model;
+package com.example.hotel.model.role;
 
 import com.example.hotel.core.base.BaseEntity;
+import com.example.hotel.model.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
