@@ -1,5 +1,6 @@
 package com.example.hotel.model;
 
+import com.example.hotel.core.base.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

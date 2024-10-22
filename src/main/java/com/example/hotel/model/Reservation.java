@@ -1,5 +1,6 @@
 package com.example.hotel.model;
 
+import com.example.hotel.core.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @Table(name = "RESERVATION")
-public class Reservation extends BaseEntity{
+public class Reservation extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "room_id")

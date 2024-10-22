@@ -1,5 +1,6 @@
 package com.example.hotel.model;
 
+import com.example.hotel.core.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "`USER`", uniqueConstraints = @UniqueConstraint(columnNames = {"USERNAME"}, name = "user_username_uc"))
-public class User  extends BaseEntity{
+public class User  extends BaseEntity {
 
     @Column(name = "USERNAME", nullable = false)
     private String username;
