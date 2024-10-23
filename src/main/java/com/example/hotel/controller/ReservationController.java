@@ -1,5 +1,6 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.core.record.ReservationRecord;
 import com.example.hotel.model.reservation.ReservationRequestDTO;
 import com.example.hotel.model.reservation.ReservationResponseDTO;
 import com.example.hotel.service.ReservationService;
@@ -46,5 +47,11 @@ public class ReservationController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         reservationService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/reservation/rom")
+    public ResponseEntity<ReservationResponseDTO> reserveRoom(@RequestBody ReservationRecord requestDTO) {
+        ReservationResponseDTO responseDTO = reservationService.reserveRoom(requestDTO);
+        return ResponseEntity.ok(responseDTO);
     }
 }

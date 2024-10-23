@@ -17,6 +17,7 @@ public class Room extends BaseEntity {
 
     private String roomType;
     private Double price;
+    private Boolean available;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")

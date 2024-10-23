@@ -10,5 +10,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class RoomResponseDTO extends ResponseDTO {
     private String roomType;
-    private double price;
+    private Double price;
+    private Boolean available;
 }

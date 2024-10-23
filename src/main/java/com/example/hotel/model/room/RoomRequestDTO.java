@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoomRequestDTO extends RequestDTO {
     private String roomType;
-    private double price;
+    private Double price;
+    private Boolean available;
 }

@@ -20,7 +20,7 @@ public class Reservation extends BaseEntity {
 
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private Boolean available;
+
 
     @ManyToOne
     @JoinColumn(name = "room_id")

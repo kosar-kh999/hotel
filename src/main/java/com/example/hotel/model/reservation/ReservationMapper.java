@@ -16,7 +16,6 @@ public class ReservationMapper implements BaseMapper<Reservation, ReservationReq
     public void toEntity(ReservationRequestDTO dto, Reservation reservation) {
         reservation.setCheckInDate(dto.getCheckInDate());
         reservation.setCheckOutDate(dto.getCheckOutDate());
-        reservation.setAvailable(dto.getAvailable());
     }
 
     @Override
@@ -30,7 +29,6 @@ public class ReservationMapper implements BaseMapper<Reservation, ReservationReq
     public void toDTO(Reservation reservation, ReservationResponseDTO dto) {
         dto.setCheckInDate(reservation.getCheckInDate());
         dto.setCheckOutDate(reservation.getCheckOutDate());
-        dto.setAvailable(reservation.getAvailable());
         baseField(dto, reservation);
     }
 }

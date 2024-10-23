@@ -1,6 +1,7 @@
 package com.example.hotel.model.reservation;
 
 import com.example.hotel.core.base.RequestDTO;
+import com.example.hotel.model.room.RoomRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,5 +16,5 @@ import java.time.LocalDate;
 public class ReservationRequestDTO extends RequestDTO {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private Boolean available;
+    private RoomRequestDTO room;
 }
