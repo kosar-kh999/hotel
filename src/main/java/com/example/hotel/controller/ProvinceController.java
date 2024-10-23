@@ -18,7 +18,7 @@ public class ProvinceController {
         this.provinceService = provinceService;
     }
 
-    @PostMapping(value = "/vprovince")
+    @PostMapping(value = "/province")
     public ResponseEntity<Integer> add(@RequestBody ProvinceRequestDTO requestDTO) {
         Integer savedId = provinceService.save(requestDTO);
         return ResponseEntity.ok(savedId);

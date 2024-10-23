@@ -27,9 +27,5 @@ public interface BaseMapper<E extends BaseEntity, R extends RequestDTO, P extend
 
     default void baseField(P d, E e) {
         d.setId(e.getId());
-        d.setCreatedAt(e.getCreatedAt());
-        d.setUpdatedAt(e.getUpdatedAt());
-        d.setCreatedBy(e.getCreatedBy());
-        d.setUpdatedBy(e.getUpdatedBy());
     }
 }
