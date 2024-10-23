@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Room extends BaseEntity {
 
     private String roomType;
-    private double price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")

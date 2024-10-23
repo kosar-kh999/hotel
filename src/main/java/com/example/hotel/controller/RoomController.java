@@ -55,4 +55,10 @@ public class RoomController {
         List<RoomResponseDTO> rooms = roomService.getRoomsByHotel(id);
         return ResponseEntity.ok().body(rooms);
     }
+
+    @GetMapping("/room/hotel/city/{id}")
+    public ResponseEntity<List<RoomResponseDTO>> getRoomsByHotelAndCity(@PathVariable Integer id) {
+        List<RoomResponseDTO> rooms = roomService.getRoomsByHotelAndCity(id);
+        return ResponseEntity.ok().body(rooms);
+    }
 }

@@ -13,4 +13,5 @@ import java.time.LocalDate;
 public class ReservationResponseDTO extends ResponseDTO {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private Boolean available;
 }

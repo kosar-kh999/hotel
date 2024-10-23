@@ -18,6 +18,10 @@ import java.time.LocalDate;
 @Table(name = "RESERVATION")
 public class Reservation extends BaseEntity {
 
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private Boolean available;
+
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
@@ -25,7 +29,4 @@ public class Reservation extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
 }

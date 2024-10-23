@@ -64,4 +64,12 @@ public class RoomService {
                 .map(roomMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<RoomResponseDTO> getRoomsByHotelAndCity(Integer id) {
+        List<Hotel> hotels = hotelRepo.findByCityId(id);
+        return hotels.stream()
+                .flatMap(hotel -> roomRepo.findByHotelId(hotel.getId()).stream())
+                .map(roomMapper::toDTO)
+                .toList();
+    }
 }
