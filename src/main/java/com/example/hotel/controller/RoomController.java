@@ -9,6 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class RoomController {
     private final RoomService roomService;
@@ -46,5 +48,11 @@ public class RoomController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         roomService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/room/hotel/{id}")
+    public ResponseEntity<List<RoomResponseDTO>> getRoomsByHotel(@PathVariable Integer id) {
+        List<RoomResponseDTO> rooms = roomService.getRoomsByHotel(id);
+        return ResponseEntity.ok().body(rooms);
     }
 }
