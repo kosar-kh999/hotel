@@ -13,7 +13,8 @@ public class RoleService {
     private final RoleRepo roleRepo;
     private final RoleMapper roleMapper;
 
-    public RoleService(RoleRepo roleRepo, RoleMapper roleMapper) {
+    public RoleService(RoleRepo roleRepo,
+                       RoleMapper roleMapper) {
         this.roleRepo = roleRepo;
         this.roleMapper = roleMapper;
     }
