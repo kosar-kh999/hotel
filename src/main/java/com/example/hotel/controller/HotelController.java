@@ -1,5 +1,6 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.core.record.HotelRecord;
 import com.example.hotel.model.hotel.HotelRequestDTO;
 import com.example.hotel.model.hotel.HotelResponseDTO;
 import com.example.hotel.service.HotelService;
@@ -19,7 +20,7 @@ public class HotelController {
     }
 
     @PostMapping(value = "/hotel")
-    public ResponseEntity<Integer> add(@RequestBody HotelRequestDTO requestDTO) {
+    public ResponseEntity<Integer> add(@RequestBody HotelRecord requestDTO) {
         Integer savedId = hotelService.save(requestDTO);
         return ResponseEntity.ok(savedId);
     }

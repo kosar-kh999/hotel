@@ -1,6 +1,7 @@
 package com.example.hotel.model.hotel;
 
 import com.example.hotel.core.base.BaseMapper;
+import com.example.hotel.core.record.HotelRecord;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,5 +31,12 @@ public class HotelMapper implements BaseMapper<Hotel, HotelRequestDTO, HotelResp
         dto.setName(hotel.getName());
         dto.setLocation(hotel.getLocation());
         baseField(dto, hotel);
+    }
+
+    public Hotel toEntity(HotelRecord record) {
+        Hotel hotel = new Hotel();
+        hotel.setName(record.name());
+        hotel.setLocation(record.location());
+        return hotel;
     }
 }

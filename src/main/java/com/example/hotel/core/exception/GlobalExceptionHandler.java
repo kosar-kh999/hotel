@@ -18,16 +18,27 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({CustomException.class})
     public ResponseEntity<Object> handleCustomException(CustomException ex) {
+        String errorMessage = messageSource.getMessage(
+                ex.getMessage() + ".message", new Object[]{}, ex.getMessage(), Locale.getDefault()
+        );
 
-        String errorMessage = messageSource.getMessage(ex.getMessage() + ".message",
-                new Object[]{}, ex.getMessage(), Locale.getDefault());
+        String errorCodeStr = messageSource.getMessage(
+                ex.getMessage() + ".code", new Object[]{}, "0", Locale.getDefault()
+        );
 
-        String errorCode = messageSource.getMessage(ex.getMessage() + ".code", new Object[]{},
-                String.valueOf(ex.getErrorCode()), Locale.getDefault());
+        int errorCode;
+        try {
+            errorCode = Integer.parseInt(Objects.requireNonNull(errorCodeStr));
+        } catch (NumberFormatException e) {
+            errorCode = 0;
+        }
+
         int httpStatusValue = ex.getHttpStatusCode() != null ? ex.getHttpStatusCode() : 400;
+
         RestError restError = new RestError(httpStatusValue);
         restError.setMessage(errorMessage);
-        restError.setErrorCode(Integer.parseInt(Objects.requireNonNull(errorCode)));
+        restError.setErrorCode(errorCode);
+
         return buildResponseEntity(restError);
     }
 
