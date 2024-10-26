@@ -17,7 +17,7 @@ public class City extends BaseEntity {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PROVINCE_ID")
     private Province province;
 

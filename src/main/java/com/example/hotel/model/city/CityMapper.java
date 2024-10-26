@@ -21,7 +21,7 @@ public class CityMapper implements BaseMapper<City, CityRequestDTO, CityResponse
 
     @Override
     public void toEntity(CityRequestDTO requestDTO, City city) {
-        city.setName(city.getName());
+        city.setName(requestDTO.getName());
         city.setProvince(provinceMapper.toEntity(requestDTO.getProvince()));
     }
 
