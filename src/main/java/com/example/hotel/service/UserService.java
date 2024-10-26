@@ -7,6 +7,7 @@ import com.example.hotel.model.role.RoleRepo;
 import com.example.hotel.model.user.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,14 +17,16 @@ public class UserService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserService(UserRepo userRepo,
                        RoleRepo roleRepo,
-                       UserMapper userMapper
-    ) {
+                       UserMapper userMapper,
+                       BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
         this.userMapper = userMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -32,6 +35,7 @@ public class UserService {
         if (user != null)
             throw new CustomException(String.format("کاربر  %s قبلا ثبت نام کرده است.", requestDTO.getUsername()));
         User newUser = userMapper.toEntity(requestDTO);
+        newUser.setPassword(bCryptPasswordEncoder.encode(requestDTO.getPassword()));
         return userRepo.save(newUser).getId();
     }
 

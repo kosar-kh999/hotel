@@ -26,7 +26,6 @@ public class UserMapper implements BaseMapper<User, UserRequestDTO, UserResponse
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setEmail(dto.getEmail());
-        user.setRoles(roleMapper.toEntity(dto.getRoles()));
     }
 
     @Override
