@@ -1,10 +1,17 @@
 package com.example.hotel.model.room;
 
 import com.example.hotel.core.base.BaseMapper;
+import com.example.hotel.model.hotel.HotelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RoomMapper implements BaseMapper<Room, RoomRequestDTO, RoomResponseDTO> {
+    private final HotelMapper hotelMapper;
+
+    public RoomMapper(HotelMapper hotelMapper) {
+        this.hotelMapper = hotelMapper;
+    }
+
     @Override
     public Room toEntity(RoomRequestDTO dto) {
         Room room = new Room();
@@ -17,6 +24,7 @@ public class RoomMapper implements BaseMapper<Room, RoomRequestDTO, RoomResponse
         room.setRoomType(dto.getRoomType());
         room.setPrice(dto.getPrice());
         room.setAvailable(dto.getAvailable());
+        room.setHotel(hotelMapper.toEntity(dto.getHotel()));
     }
 
     @Override
@@ -31,6 +39,7 @@ public class RoomMapper implements BaseMapper<Room, RoomRequestDTO, RoomResponse
         dto.setRoomType(room.getRoomType());
         dto.setPrice(room.getPrice());
         dto.setAvailable(room.getAvailable());
+        dto.setHotel(hotelMapper.toDTO(room.getHotel()));
         baseField(dto, room);
     }
 }

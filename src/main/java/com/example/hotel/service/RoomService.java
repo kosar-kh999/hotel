@@ -29,6 +29,9 @@ public class RoomService {
 
     public Integer save(RoomRequestDTO requestDTO) {
         Room room = roomMapper.toEntity(requestDTO);
+        Optional<Hotel> hotelOpt = hotelRepo.findById(requestDTO.getHotel().getId());
+        Hotel hotel = hotelOpt.orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", requestDTO.getHotel().getId())));
+        room.setHotel(hotel);
         return roomRepo.save(room).getId();
     }
 
