@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -20,5 +20,5 @@ public class UserRequestDTO extends RequestDTO {
     private String lastName;
     private String email;
     private RoleRequestDTO role;
-    private Set<RoleRequestDTO> roles;
+    private List<RoleRequestDTO> roles;
 }

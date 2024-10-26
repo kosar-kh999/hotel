@@ -1,5 +1,6 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.core.record.UserRecord;
 import com.example.hotel.model.user.UserRequestDTO;
 import com.example.hotel.model.user.UserResponseDTO;
 import com.example.hotel.service.UserService;
@@ -44,6 +45,12 @@ public class UserController {
     @DeleteMapping(value = "/user/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/user/role")
+    public ResponseEntity<Void> assignRoleForUser(@RequestBody UserRecord requestDTO) {
+        userService.assignRoleForUser(requestDTO);
         return ResponseEntity.noContent().build();
     }
 }
