@@ -11,8 +11,11 @@ import com.example.hotel.model.user.UserRepo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,9 @@ public class ReservationService {
 
     public Integer save(ReservationRequestDTO requestDTO) {
         Reservation reservation = reservationMapper.toEntity(requestDTO);
+        Optional<Room> roomOpt = roomRepo.findById(requestDTO.getRoom().getId());
+        Room room = roomOpt.orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", requestDTO.getRoom().getId())));
+        reservation.setRoom(room);
         return reservationRepo.save(reservation).getId();
     }
 
@@ -63,7 +69,8 @@ public class ReservationService {
         reservationRepo.delete(reservation);
     }
 
-    public ReservationResponseDTO reserveRoom(ReservationRecord reservationRecord) {
+    @Transactional
+    public ReservationDTO reserveRoom(ReservationRecord reservationRecord) {
         Room room = roomRepo.findById(reservationRecord.roomId())
                 .orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", reservationRecord.roomId())));
 
@@ -81,6 +88,9 @@ public class ReservationService {
 
         LocalDate checkInDate = DateUtil.convertPersianDateStringToLocalDate(reservationRecord.persianCheckInDate());
         LocalDate checkOutDate = DateUtil.convertPersianDateStringToLocalDate(reservationRecord.persianCheckOutDate());
+        Period period = Period.between(checkInDate, checkOutDate);
+        Integer days = period.getDays();
+        BigDecimal totalValue = BigDecimal.valueOf(days * room.getPrice());
 
         Reservation reservation = new Reservation();
         reservation.setRoom(room);
@@ -88,8 +98,13 @@ public class ReservationService {
         reservation.setCheckInDate(checkInDate);
         reservation.setCheckOutDate(checkOutDate);
 
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setTotalPrice(totalValue);
+        reservationDTO.setPersianCheckInDate(reservationRecord.persianCheckInDate());
+        reservationDTO.setPersianCheckOutDate(reservationRecord.persianCheckOutDate());
+
         reservationRepo.save(reservation);
-        return reservationMapper.toDTO(reservation);
+        return reservationMapper.toDTO(reservation, reservationDTO);
     }
 
     private boolean isRoomAvailableForDates(ReservationRecord reservationRecord) {
@@ -97,6 +112,10 @@ public class ReservationService {
 
         LocalDate checkInDate = DateUtil.convertPersianDateStringToLocalDate(reservationRecord.persianCheckInDate());
         LocalDate checkOutDate = DateUtil.convertPersianDateStringToLocalDate(reservationRecord.persianCheckOutDate());
+
+        if (checkInDate.isBefore(LocalDate.now()) || checkOutDate.isBefore(LocalDate.now())) {
+            return false;
+        }
 
         for (Reservation reservation : existingReservations) {
             if (reservation.getRoom().getId().equals(reservationRecord.roomId())) {

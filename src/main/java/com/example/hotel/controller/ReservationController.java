@@ -1,6 +1,7 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.core.record.ReservationRecord;
+import com.example.hotel.model.reservation.ReservationDTO;
 import com.example.hotel.model.reservation.ReservationRequestDTO;
 import com.example.hotel.model.reservation.ReservationResponseDTO;
 import com.example.hotel.service.ReservationService;
@@ -49,9 +50,9 @@ public class ReservationController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping(value = "/reservation/rom")
-    public ResponseEntity<ReservationResponseDTO> reserveRoom(@RequestBody ReservationRecord requestDTO) {
-        ReservationResponseDTO responseDTO = reservationService.reserveRoom(requestDTO);
+    @PostMapping(value = "/reservation/room")
+    public ResponseEntity<ReservationDTO> reserveRoom(@RequestBody ReservationRecord requestDTO) {
+        ReservationDTO responseDTO = reservationService.reserveRoom(requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
 }

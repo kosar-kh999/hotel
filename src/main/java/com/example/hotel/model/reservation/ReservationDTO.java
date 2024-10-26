@@ -1,18 +1,19 @@
 package com.example.hotel.model.reservation;
 
-import com.example.hotel.core.base.ResponseDTO;
 import com.example.hotel.model.room.RoomResponseDTO;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Setter
 @Getter
-@SuperBuilder
-public class ReservationResponseDTO extends ResponseDTO {
+public class ReservationDTO {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private String persianCheckInDate;
+    private String persianCheckOutDate;
+    private BigDecimal totalPrice;
     private RoomResponseDTO room;
 }
