@@ -4,7 +4,8 @@ import com.example.hotel.core.base.BaseEntity;
 import com.example.hotel.model.creditTransfer.enumuration.CreditTransferType;
 import com.example.hotel.model.user.User;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class CreditTransfer extends BaseEntity {
     private String description;
     private CreditTransferType creditTransferType;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "USER-ID")
     private User user;
 }

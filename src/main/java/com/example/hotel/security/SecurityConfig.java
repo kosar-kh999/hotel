@@ -26,6 +26,7 @@ public class SecurityConfig {
                         .requestMatchers("/province/**").permitAll()
                         .requestMatchers("/reservation/**").permitAll()
                         .requestMatchers("/room/**").permitAll()
+                        .requestMatchers("/credit-transfer/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults());

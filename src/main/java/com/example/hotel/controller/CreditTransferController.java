@@ -2,6 +2,7 @@ package com.example.hotel.controller;
 
 import com.example.hotel.model.creditTransfer.CreditTransferRequestDTO;
 import com.example.hotel.model.creditTransfer.CreditTransferResponseDTO;
+import com.example.hotel.model.creditTransfer.record.CreditTransferRecord;
 import com.example.hotel.service.CreditTransferService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,5 +46,11 @@ public class CreditTransferController {
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         creditTransferService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/credit-transfer/user")
+    public ResponseEntity<CreditTransferResponseDTO> AddCreditForUser(@RequestBody CreditTransferRecord requestDTO) {
+        CreditTransferResponseDTO responseDTO = creditTransferService.AddCreditForUser(requestDTO);
+        return ResponseEntity.ok(responseDTO);
     }
 }
