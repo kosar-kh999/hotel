@@ -1,7 +1,7 @@
 package com.example.hotel.model.hotel;
 
 import com.example.hotel.core.base.BaseMapper;
-import com.example.hotel.core.record.HotelRecord;
+import com.example.hotel.model.hotel.record.HotelRecord;
 import org.springframework.stereotype.Component;
 
 @Component

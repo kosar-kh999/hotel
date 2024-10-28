@@ -1,10 +1,11 @@
 package com.example.hotel.service;
 
 import com.example.hotel.core.exception.CustomException;
-import com.example.hotel.core.record.UserRecord;
 import com.example.hotel.model.role.Role;
 import com.example.hotel.model.role.RoleRepo;
 import com.example.hotel.model.user.*;
+import com.example.hotel.model.user.record.ResetPasswordRecord;
+import com.example.hotel.model.user.record.UserRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -72,5 +73,14 @@ public class UserService {
             user.getRoles().add(role);
         }
         userMapper.toDTO(userRepo.save(user));
+    }
+
+    public void resetPasswordOfUser(ResetPasswordRecord record) {
+        Optional<User> userOpt = userRepo.findById(record.id());
+        User user = userOpt.orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", record.id())));
+        if (!(record.newPassword().equals(record.confirmedPassword())))
+            throw new CustomException("رمز عبور وارد شده با تکرار رمز عبور آن برابر باشد.");
+        user.setPassword(bCryptPasswordEncoder.encode(record.newPassword()));
+        userRepo.save(user);
     }
 }

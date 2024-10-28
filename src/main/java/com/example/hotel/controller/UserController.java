@@ -1,8 +1,9 @@
 package com.example.hotel.controller;
 
-import com.example.hotel.core.record.UserRecord;
 import com.example.hotel.model.user.UserRequestDTO;
 import com.example.hotel.model.user.UserResponseDTO;
+import com.example.hotel.model.user.record.ResetPasswordRecord;
+import com.example.hotel.model.user.record.UserRecord;
 import com.example.hotel.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -51,6 +52,12 @@ public class UserController {
     @PostMapping(value = "/user/role")
     public ResponseEntity<Void> assignRoleForUser(@RequestBody UserRecord requestDTO) {
         userService.assignRoleForUser(requestDTO);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/user/reset/password")
+    public ResponseEntity<Void> resetPasswordOfUser(@RequestBody ResetPasswordRecord requestDTO) {
+        userService.resetPasswordOfUser(requestDTO);
         return ResponseEntity.noContent().build();
     }
 }

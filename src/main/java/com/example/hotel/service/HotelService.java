@@ -1,7 +1,7 @@
 package com.example.hotel.service;
 
 import com.example.hotel.core.exception.CustomException;
-import com.example.hotel.core.record.HotelRecord;
+import com.example.hotel.model.hotel.record.HotelRecord;
 import com.example.hotel.model.city.City;
 import com.example.hotel.model.city.CityRepo;
 import com.example.hotel.model.hotel.*;

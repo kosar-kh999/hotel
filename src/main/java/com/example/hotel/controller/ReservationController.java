@@ -1,6 +1,6 @@
 package com.example.hotel.controller;
 
-import com.example.hotel.core.record.ReservationRecord;
+import com.example.hotel.model.reservation.record.ReservationRecord;
 import com.example.hotel.model.reservation.ReservationDTO;
 import com.example.hotel.model.reservation.ReservationRequestDTO;
 import com.example.hotel.model.reservation.ReservationResponseDTO;

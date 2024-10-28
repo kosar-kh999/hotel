@@ -1,4 +1,4 @@
-package com.example.hotel.core.record;
+package com.example.hotel.model.user.record;
 
 import java.util.List;
 

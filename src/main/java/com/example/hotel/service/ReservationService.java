@@ -1,7 +1,7 @@
 package com.example.hotel.service;
 
 import com.example.hotel.core.exception.CustomException;
-import com.example.hotel.core.record.ReservationRecord;
+import com.example.hotel.model.reservation.record.ReservationRecord;
 import com.example.hotel.core.util.DateUtil;
 import com.example.hotel.model.reservation.*;
 import com.example.hotel.model.room.Room;
