@@ -2,6 +2,7 @@ package com.example.hotel.model.user;
 
 import com.example.hotel.core.base.BaseEntity;
 import com.example.hotel.model.role.Role;
+import com.example.hotel.model.wallet.Wallet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "`USER`", uniqueConstraints = @UniqueConstraint(columnNames = {"USERNAME"}, name = "user_username_uc"))
-public class User  extends BaseEntity {
+public class User extends BaseEntity {
 
     @Column(name = "USERNAME", nullable = false)
     private String username;
@@ -28,4 +29,7 @@ public class User  extends BaseEntity {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private Wallet wallet;
 }

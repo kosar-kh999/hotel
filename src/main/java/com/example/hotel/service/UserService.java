@@ -6,11 +6,14 @@ import com.example.hotel.model.role.RoleRepo;
 import com.example.hotel.model.user.*;
 import com.example.hotel.model.user.record.ResetPasswordRecord;
 import com.example.hotel.model.user.record.UserRecord;
+import com.example.hotel.model.wallet.Wallet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -82,5 +85,18 @@ public class UserService {
             throw new CustomException("رمز عبور وارد شده با تکرار رمز عبور آن برابر باشد.");
         user.setPassword(bCryptPasswordEncoder.encode(record.newPassword()));
         userRepo.save(user);
+    }
+
+    public void updateWalletOfUser() {
+        List<User> users = userRepo.findAll();
+        for (User user : users) {
+            if (user.getWallet() == null) {
+                Wallet wallet = new Wallet();
+                wallet.setBalance(BigDecimal.ZERO);
+                wallet.setUser(user);
+                user.setWallet(wallet);
+            }
+        }
+        userRepo.saveAll(users);
     }
 }

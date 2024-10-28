@@ -60,4 +60,10 @@ public class UserController {
         userService.resetPasswordOfUser(requestDTO);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(path = "/user/wallet")
+    public ResponseEntity<Void> updateUser() {
+        userService.updateWalletOfUser();
+        return ResponseEntity.noContent().build();
+    }
 }
