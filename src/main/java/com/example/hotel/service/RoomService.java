@@ -72,7 +72,7 @@ public class RoomService {
         List<Hotel> hotels = hotelRepo.findByCityId(id);
         return hotels.stream()
                 .flatMap(hotel -> roomRepo.findByHotelId(hotel.getId()).stream())
-                .map(roomMapper::toDTO)
+                .map(roomMapper::toDTOForCity)
                 .toList();
     }
 }
