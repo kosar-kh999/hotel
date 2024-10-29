@@ -2,7 +2,9 @@ package com.example.hotel.controller;
 
 import com.example.hotel.model.creditTransfer.CreditTransferRequestDTO;
 import com.example.hotel.model.creditTransfer.CreditTransferResponseDTO;
+import com.example.hotel.model.creditTransfer.record.AcceptCreditRecord;
 import com.example.hotel.model.creditTransfer.record.CreditTransferRecord;
+import com.example.hotel.model.wallet.WalletResponseDTO;
 import com.example.hotel.service.CreditTransferService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,5 +54,11 @@ public class CreditTransferController {
     public ResponseEntity<CreditTransferResponseDTO> AddCreditForUser(@RequestBody CreditTransferRecord requestDTO) {
         CreditTransferResponseDTO responseDTO = creditTransferService.AddCreditForUser(requestDTO);
         return ResponseEntity.ok(responseDTO);
+    }
+
+    @PostMapping(value = "/credit-transfer/accepted")
+    public ResponseEntity<WalletResponseDTO> acceptCreditTransfer(@RequestBody AcceptCreditRecord requestDTO) {
+        WalletResponseDTO walletResponseDTO = creditTransferService.acceptCreditTransfer(requestDTO);
+        return ResponseEntity.ok(walletResponseDTO);
     }
 }

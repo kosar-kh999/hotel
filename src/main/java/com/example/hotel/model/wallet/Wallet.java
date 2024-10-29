@@ -2,14 +2,13 @@ package com.example.hotel.model.wallet;
 
 import com.example.hotel.core.base.BaseEntity;
 import com.example.hotel.model.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.example.hotel.model.walletHistory.WalletHistory;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,4 +21,7 @@ public class Wallet extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "wallet")
+    private List<WalletHistory> walletHistories;
 }
