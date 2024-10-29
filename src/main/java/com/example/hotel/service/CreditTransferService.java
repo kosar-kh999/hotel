@@ -95,9 +95,10 @@ public class CreditTransferService {
         Optional<CreditTransfer> creditTransferOpt = creditTransferRepo.findById(record.creditId());
         CreditTransfer creditTransfer = creditTransferOpt.orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", record.creditId())));
         Wallet wallet = user.getWallet();
-        wallet.setBalance(creditTransfer.getAmount());
+        wallet.setBalance(wallet.getBalance().add(creditTransfer.getAmount()));
         walletRepo.save(wallet);
     }
+
     @Transactional
     public WalletResponseDTO acceptCreditTransfer(AcceptCreditRecord record) {
         Optional<CreditTransfer> creditTransferOpt = creditTransferRepo.findById(record.creditId());
@@ -117,5 +118,12 @@ public class CreditTransferService {
         walletHistory.setTransactionType(TransactionType.DEPOSIT);
         walletHistoryRepo.save(walletHistory);
         return walletMapper.toDTO(creditTransfer.getUser().getWallet());
+    }
+
+    public void rejectCreditTransfer(AcceptCreditRecord record) {
+        Optional<CreditTransfer> creditTransferOpt = creditTransferRepo.findById(record.creditId());
+        CreditTransfer creditTransfer = creditTransferOpt.orElseThrow(() -> new CustomException(String.format("اطلاعاتی با شناسه %s یافت نشد.", record.creditId())));
+        creditTransfer.setCreditTransferType(CreditTransferType.REJECT);
+        creditTransferRepo.save(creditTransfer);
     }
 }

@@ -61,4 +61,10 @@ public class CreditTransferController {
         WalletResponseDTO walletResponseDTO = creditTransferService.acceptCreditTransfer(requestDTO);
         return ResponseEntity.ok(walletResponseDTO);
     }
+
+    @PostMapping(value = "/credit-transfer/rejected")
+    public ResponseEntity<Void> rejectCreditTransfer(@RequestBody AcceptCreditRecord requestDTO) {
+        creditTransferService.rejectCreditTransfer(requestDTO);
+        return ResponseEntity.noContent().build();
+    }
 }
